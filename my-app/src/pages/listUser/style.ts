@@ -96,7 +96,6 @@ export const Fildset = styled.fieldset`
     > div {
       input {
         padding: 8px 4px;
-       
       }
       > div {
         padding: 8px 4px;
@@ -122,8 +121,4 @@ export const Legend = styled.legend`
   display: contents;
   color: transparent;
   font-size: 0.1rem;
-`;
-export const Add = styled.div`
-  display: flex;
-  justify-content: flex-end;
 `;

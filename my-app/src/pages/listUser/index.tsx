@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import React from "react";
 import {
   Form,
-  Add,
   Fildset,
   Legend,
   Subtitle,
@@ -36,11 +36,9 @@ import {
 } from "@mui/material";
 import { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
-import React from "react";
 import avatarWoman from "../../assets/avatarf.svg";
 import avatarMen from "../../assets/avatarm.svg";
 import illustrationListUser from "../../assets/illustrationListUser.svg";
-import { IoPersonAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import { toastfyError, toastfySuccess } from "../../components/toast";
@@ -75,7 +73,6 @@ const listUser = () => {
   const [gender, setGender] = useState("");
   const [status, setStatus] = useState("active");
   const [isLoading, setIsLoading] = useState(false);
-
   const [modalEdit, setModalEdit] = React.useState(false);
   const [dialogDelete, setDialogDelete] = React.useState(false);
 
@@ -87,34 +84,13 @@ const listUser = () => {
       .then(() => {
         listUsers();
         handleCloseDialog();
-        toastfySuccess("Usuário excluido com sucesso!");
+        toastfySuccess("Usuário excluído com sucesso!");
       })
       .catch((error) => {
         toastfyError("Erro ao excluir usuário.");
         console.error("There was an error!", error);
       });
   };
-
-  function openModalAndSelectUser(id: number) {
-    setModalEdit(true);
-
-    axios
-      .get(`https://gorest.co.in/public/v2/users/${id}`, {
-        headers: headers,
-      })
-      .then((response) => {
-        setId(response.data.id);
-        setName(response.data.name);
-        setEmail(response.data.email);
-        setGender(response.data.gender);
-      });
-  }
-  const openDialogDelete = (id: number) => {
-    setDialogDelete(true);
-    setId(String(id));
-  };
-  const handleCloseModal = () => setModalEdit(false);
-  const handleCloseDialog = () => setDialogDelete(false);
 
   const listUsers = () => {
     axios
@@ -156,6 +132,30 @@ const listUser = () => {
         handleCloseModal();
       });
   };
+
+  function openModalAndSelectUser(id: number) {
+    setModalEdit(true);
+
+    axios
+      .get(`https://gorest.co.in/public/v2/users/${id}`, {
+        headers: headers,
+      })
+      .then((response) => {
+        setId(response.data.id);
+        setName(response.data.name);
+        setEmail(response.data.email);
+        setGender(response.data.gender);
+      });
+  }
+
+  const openDialogDelete = (id: number) => {
+    setDialogDelete(true);
+    setId(String(id));
+  };
+
+  const handleCloseModal = () => setModalEdit(false);
+
+  const handleCloseDialog = () => setDialogDelete(false);
 
   useEffect(() => {
     listUsers();
@@ -262,13 +262,12 @@ const listUser = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        
         <Form onSubmit={updateUsers}>
-        {isMobile === true && (
-          <IconButton color="primary" onClick={handleCloseModal}>
-            <AiOutlineClose />
-          </IconButton>
-        )}
+          {isMobile === true && (
+            <IconButton color="primary" onClick={handleCloseModal}>
+              <AiOutlineClose />
+            </IconButton>
+          )}
           <Fildset>
             <Legend>Cadastro de Usuários</Legend>
             {gender === "female" ? (
@@ -284,7 +283,7 @@ const listUser = () => {
               required
               title="Preencha este campo corretamente"
               variant="outlined"
-              helperText="Nome Completo"
+              helperText="Nome Sobrenome Exemplo"
               type="text"
             />
             <TextField

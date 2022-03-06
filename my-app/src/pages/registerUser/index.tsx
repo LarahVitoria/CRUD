@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { FormEvent, useState } from "react";
 import React from "react";
+import { FormEvent, useState } from "react";
 import Navbar from "../../components/navbar";
 import {
   Container,
@@ -41,7 +41,7 @@ const RegisterUsers = () => {
   const [status] = useState("active");
   const [isLoading, setIsLoading] = useState(false);
 
-  const RegisterUsers = (event: FormEvent, ) => {
+  const RegisterUsers = (event: FormEvent) => {
     event.preventDefault();
 
     setIsLoading(true);
